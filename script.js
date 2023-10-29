@@ -4,11 +4,14 @@ let choice = ["Rock", "Paper", "Scissors"];
 let playerCount = 0;
 let computerCount = 0;
 let round = 0;
+//const btnRock = document.getElementById("rock");
+//const btnPaper = document.getElementById("paper");
+//const btnScissors = document.getElementById("scissors");
 
 //Create function so that Computer randomly chooses from "Rock, Paper,Scissors"
-function getComputerChoice(choice) {
-  return choice[Math.floor(Math.random() * choice.length)];
-}
+//function getComputerChoice(choice) {
+//return choice[Math.floor(Math.random() * choice.length)];
+//}
 
 //Create function to ask user what option will it choose via prompt pop up
 function getPlayerChoice(playerchoice) {
@@ -16,9 +19,8 @@ function getPlayerChoice(playerchoice) {
 }
 
 //Create a round for the game. Get player and computer input
-function playRound(playerSelection, computerSelection) {
-  playerSelection = getPlayerChoice();
-  computerSelection = getComputerChoice(choice);
+function playRound(playerSelection) {
+  computerSelection = choice[Math.floor(Math.random() * choice.length)];
   //Update round variable with incrementation
   round = ++round;
 
@@ -95,3 +97,17 @@ function game() {
     return "It's a tie! Well done!";
   }
 }
+
+document.getElementById("rock").addEventListener("click", function () {
+  playRound("Rock");
+});
+
+document.getElementById("paper").addEventListener("click", function () {
+  playRound("Paper");
+});
+
+document.getElementById("scissors").addEventListener("click", function () {
+  playRound("Scissors");
+});
+
+console.log(playRound());
