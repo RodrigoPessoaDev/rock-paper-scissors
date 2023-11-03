@@ -120,9 +120,3 @@ score.setAttribute(
 const winner = document.createElement("div");
 score.appendChild(winner);
 winner.setAttribute("style", "margin-top: 5px");
-
-if (playerScore === 5) {
-  winner.textContent = "Player wins!";
-} else if (computerScore === 5) {
-  winner.textContent = "Computer wins!";
-}
