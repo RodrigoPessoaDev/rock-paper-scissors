@@ -4,6 +4,27 @@ let computerScore = 0;
 let round = 0;
 let playerChoice = 0;
 
+const score = document.querySelector("#score");
+const roundTrack = document.createElement("div");
+const player = document.createElement("div");
+const computer = document.createElement("div");
+const winner = document.createElement("div");
+
+roundTrack.textContent = "Round: " + round;
+player.textContent = "Player: " + playerScore;
+computer.textContent = "Computer: " + computerScore;
+
+score.appendChild(roundTrack);
+score.appendChild(player);
+score.appendChild(computer);
+score.appendChild(winner);
+
+score.setAttribute(
+  "style",
+  "border: 1px solid black; margin:10px; padding: 5px"
+);
+winner.setAttribute("style", "margin-top: 5px");
+
 //Computer random input
 function getComputerChoice() {
   let computerChoice;
@@ -34,17 +55,22 @@ function playRound() {
   ) {
     player.textContent = "Player: " + ++playerScore;
     console.log("Player wins.");
+    roundTrack.textContent = "Round: " + ++round;
   } else if (playerSelection === computerSelection) {
     console.log("It's a tie.");
+    roundTrack.textContent = "Round: " + ++round;
   } else {
     computer.textContent = "Computer: " + ++computerScore;
     console.log("Computer wins.");
+    roundTrack.textContent = "Round: " + ++round;
   }
 
-  if (playerScore === 5) {
-    winner.textContent = "Player wins!";
-  } else if (computerScore === 5) {
-    winner.textContent = "Computer wins!";
+  if (round === 5 && playerScore > computerScore) {
+    winner.textContent = "Player is the winner!";
+  } else if (round === 5 && computerScore > playerScore) {
+    winner.textContent = "Computer is the winner!";
+  } else if (round === 5 && computerScore === playerScore) {
+    winner.textContent = "It's a tie!";
   }
 }
 
@@ -52,71 +78,25 @@ function playRound() {
 function game() {
   let result;
 
-  for (let i = 0; i < 5; i++) {
-    result = playRound();
-    round = ++round;
-    if (result === "Player wins!") {
-      playerScore = ++playerScore;
-      console.log("Player: " + playerScore);
-      console.log("Computer: " + computerScore);
-      console.log("Round: " + round);
-    } else if (result === "Computer wins!") {
-      computerScore = ++computerScore;
-      console.log("Player: " + playerScore);
-      console.log("Computer: " + computerScore);
-      console.log("Round: " + round);
-    } else {
-      console.log("Player: " + playerScore);
-      console.log("Computer: " + computerScore);
-      console.log("Round: " + round);
-    }
-  }
-
-  //Determine who is the winner
-  if (playerScore > computerScore) {
-    return "Player is the absolute winner! Congrats!";
-  } else if (computerScore > playerScore) {
-    return "Computer is the winner! Better luck next time!";
-  } else {
-    return "Nobody wins!";
-  }
+  result = playRound();
 }
 
-//console.log(game());
-
+//DOM buttons selection
 const rock = document.querySelector("#rock");
 const paper = document.querySelector("#paper");
 const scissors = document.querySelector("#scissors");
+const reset = document.querySelector("#resetScore");
 
+//Buttons event listener
 rock.addEventListener("click", (e) => {
   playerChoice = e.target.id;
-  console.log(playRound());
+  game();
 });
-
 paper.addEventListener("click", (e) => {
   playerChoice = e.target.id;
-  console.log(playRound());
+  game();
 });
-
 scissors.addEventListener("click", (e) => {
   playerChoice = e.target.id;
-  console.log(playRound());
+  game();
 });
-
-const score = document.querySelector("#score");
-
-const player = document.createElement("div");
-player.textContent = "Player: " + playerScore;
-score.appendChild(player);
-const computer = document.createElement("div");
-computer.textContent = "Computer: " + computerScore;
-score.appendChild(computer);
-
-score.setAttribute(
-  "style",
-  "border: 1px solid black; margin:10px; padding: 5px"
-);
-
-const winner = document.createElement("div");
-score.appendChild(winner);
-winner.setAttribute("style", "margin-top: 5px");
