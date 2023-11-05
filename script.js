@@ -72,6 +72,12 @@ function playRound() {
   } else if (round === 5 && computerScore === playerScore) {
     winner.textContent = "It's a tie!";
   }
+
+  if (round > 5) {
+    playerScore = 0;
+    computerScore = 0;
+    round = 0;
+  }
 }
 
 //Logic for a 5 round game for rock paper scissors
