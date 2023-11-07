@@ -10,9 +10,9 @@ const player = document.createElement("div");
 const computer = document.createElement("div");
 const winner = document.createElement("div");
 
-roundTrack.textContent = "Round: " + round;
-player.textContent = "Player: " + playerScore;
-computer.textContent = "Computer: " + computerScore;
+roundTrack.textContent = `Round: ${round}`;
+player.textContent = `Player: ${playerScore}`;
+computer.textContent = `Computer : ${computerScore}`;
 
 score.appendChild(roundTrack);
 score.appendChild(player);
@@ -53,38 +53,44 @@ function playRound() {
     (playerSelection === "scissors" && computerSelection === "paper") ||
     (playerSelection === "paper" && computerSelection === "rock")
   ) {
-    player.textContent = "Player: " + ++playerScore;
+    playerScore++;
     console.log("Player wins.");
-    roundTrack.textContent = "Round: " + ++round;
+    round++;
   } else if (playerSelection === computerSelection) {
     console.log("It's a tie.");
-    roundTrack.textContent = "Round: " + ++round;
+    round++;
   } else {
-    computer.textContent = "Computer: " + ++computerScore;
+    computerScore++;
     console.log("Computer wins.");
-    roundTrack.textContent = "Round: " + ++round;
+    round++;
   }
 
   if (round === 5 && playerScore > computerScore) {
-    winner.textContent = "Player is the winner!";
+    winner.innerText = "Player is the winner!";
   } else if (round === 5 && computerScore > playerScore) {
-    winner.textContent = "Computer is the winner!";
+    winner.innerText = "Computer is the winner!";
   } else if (round === 5 && computerScore === playerScore) {
-    winner.textContent = "It's a tie!";
-  }
-
-  if (round > 5) {
-    playerScore = 0;
-    computerScore = 0;
-    round = 0;
+    winner.innerText = "It's a tie!";
   }
 }
 
 //Logic for a 5 round game for rock paper scissors
 function game() {
-  let result;
+  playRound();
 
-  result = playRound();
+  roundTrack.textContent = `Round: ${round}`;
+  player.textContent = `Player: ${playerScore}`;
+  computer.textContent = `Computer : ${computerScore}`;
+
+  if (round === 6) {
+    playerScore = 0;
+    computerScore = 0;
+    round = 0;
+    winner.innerText = "";
+    roundTrack.textContent = `Round: ${round}`;
+    player.textContent = `Player: ${playerScore}`;
+    computer.textContent = `Computer : ${computerScore}`;
+  }
 }
 
 //DOM buttons selection
